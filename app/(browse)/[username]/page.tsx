@@ -21,7 +21,11 @@ const UserPage = async ({ params }: UserPageProps) => {
     <div className="flex flex-col space-y-2">
       <p>username: {user.username}</p>
       <p>is following: {`${isFollowing}`}</p>
-      <Actions />
+      <Actions
+        isFollowing={isFollowing}
+        userId={user.id}
+        username={user.username}
+      />
     </div>
   );
 };

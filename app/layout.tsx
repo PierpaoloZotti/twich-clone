@@ -3,6 +3,7 @@ import { Urbanist } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "sonner";
 
 const font = Urbanist({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
             disableTransitionOnChange
             forcedTheme="dark"
           >
+            <Toaster theme="light" position="bottom-center" />
             {children}
           </ThemeProvider>
         </body>
