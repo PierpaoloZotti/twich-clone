@@ -1,9 +1,8 @@
-import { db } from "@/lib/db";
-import { getSelf } from "./auth-service";
+import { db } from '@/lib/db';
+import { getSelf } from './auth-service';
+import { getFollowedUsers } from './follow-service';
 
 export const getRecomended = async () => {
-  //  Insert a timer of 1 second to simulate a slow connection
-
   let userId; // Create a a variable to avoid undefined errors
   try {
     // Put on a try catch block to avoid errors when the user is not logged in
@@ -17,18 +16,31 @@ export const getRecomended = async () => {
   if (userId) {
     users = await db.user.findMany({
       where: {
-        NOT: {
-          id: userId,
-        },
+        AND: [
+          {
+            NOT: {
+              id: userId,
+            },
+          },
+          {
+            NOT: {
+              followedBy: {
+                some: {
+                  followerId: userId,
+                },
+              },
+            },
+          },
+        ],
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: 'desc',
       },
     });
   } else {
     users = await db.user.findMany({
       orderBy: {
-        createdAt: "desc",
+        createdAt: 'desc',
       },
     });
   }
