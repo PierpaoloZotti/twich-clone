@@ -28,7 +28,7 @@ export default function Logo() {
           >
             StreamHub
           </p>
-          <p className='text-xs -mt-1 text-right'>Let &apos;s Stream</p>
+          <p className='text-xs -mt-1 text-right'>Creators dashboard</p>
         </div>
       </Link>
     </>
